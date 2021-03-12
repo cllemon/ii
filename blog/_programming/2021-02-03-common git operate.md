@@ -83,8 +83,8 @@ Working Directory        Stage             Commit History          Remote
         ...
 
 [user]
-        name = kite_special
-        email = kite.special@gmail.com
+        name = kite_local_project
+        email = kite.local.project@gmail.com
 ```
 
 ### 全局配置
@@ -96,7 +96,7 @@ Working Directory        Stage             Commit History          Remote
 # 添加一些全局配置
 ~/project [master ±] : git config --local  user.name "kite"
 
-# 或直接编辑 ~/.gitconfig (👇 下面配置一些常用配置 👇)
+# 或直接编辑 ~/.gitconfig (👇 下面是一些简单的常用配置 👇)
 ~/project [master ±] : vi ~/.gitconfig
 
 [core]
@@ -110,9 +110,10 @@ Working Directory        Stage             Commit History          Remote
         s = status
         l = log --graph
         ct = commit -m
+        co = checkout
 ```
 
-## 多人开发
+## 多人协作开发
 
 ```sh
 ####################################################################
@@ -124,35 +125,35 @@ Working Directory        Stage             Commit History          Remote
 ****************
 
 # 在开发新功能前，首先拉代码，保持本地和远程仓库代码同步
-~/project [master ±] : git pull
+~/project [master ±] : git pull # 若本地原先没有使用 git clone 将代码克隆到本地
 
 # 创建一个自己的开发分支 (从当前最新的节点开始) 并切过去
-~/project [master ±] : git checkout -b kite_dev
-Switched to a new branch 'kite_dev'
+~/project [master ±] : git co -b dev
+Switched to a new branch 'dev'
 
 ------------------------------------------------------------------------------------
 # 或者 从某一次提交开始创建新的分支（若需要的话）
 ~/project [master ±] : git log --graph # 查看提交历史，选取所需开始的 commit ID
-~/project [master ±] : git checkout 45b904 -b kite_dev
+~/project [master ±] : git co 45b904 -b dev
 ------------------------------------------------------------------------------------
 
 # 同步本地分支到远程仓库
-~/project [kite_dev ±] : git push origin kite_dev:kite_dev
+~/project [dev ±] : git push origin dev:dev
 # 建立与上游分支的联系
-~/project [kite_dev ±] : git push --set-upstream origin kite_dev
+~/project [dev ±] : git push --set-upstream origin dev
 
 # balala 开始开发一个功能模块，过程中可能在本地提交了多次小的改动，比如这样
-~/project [kite_dev ±] : git ct 'feat: 完成功能模块 -- 子功能1'
-~/project [kite_dev ±] : git ct 'feat: 完成功能模块 -- 子功能2'
-~/project [kite_dev ±] : git ct 'feat: 完成功能模块 -- 子功能3'
-~/project [kite_dev ±] : git ct 'feat: 完成功能模块 -- 子功能4'
-~/project [kite_dev ±] : git ct 'feat: 完成功能模块全部完成'
+~/project [dev ±] : git ct 'feat: 完成功能模块 -- 子功能1'
+~/project [dev ±] : git ct 'feat: 完成功能模块 -- 子功能2'
+~/project [dev ±] : git ct 'feat: 完成功能模块 -- 子功能3'
+~/project [dev ±] : git ct 'feat: 完成功能模块 -- 子功能4'
+~/project [dev ±] : git ct 'feat: 完成功能模块 -- 完成收尾'
 
 # 终于，完成了功能模块的开发，开始提交代码到远程仓库
 # 老规矩，在提交代码前先拉代码（保证本地与远程同步）
 
 # 先切回本地分支 master 分支 并 拉取远程最新的代码 (可能没有最新)
-~/project [kite_dev ±] : git checkout master
+~/project [dev ±] : git co master
 ~/project [master ±] : git pull
 
 --------------------------------------------------------------------------------
@@ -162,41 +163,69 @@ Switched to a new branch 'kite_dev'
 ~/project [master ±] : git ct 'fix xxx conflict'
 --------------------------------------------------------------------------------
 
-# 将主分支 master 上的内容合并到 kite_dev 分支上
-# 首先，切换回 kite_dev 分支
-~/project [master ±] :git checkout kite_dev
+# 将主分支 master 上的内容合并到 dev 分支上
+# 首先，切换回 dev 分支
+~/project [master ±] :git co dev
 
-~/project [kite_dev ±] :git merge master
+~/project [dev ±] :git merge master
 
 --------------------------------------------------------------------------------
 # 合并可能会有冲突，如果有冲突，解决冲突解决流程如下 👇
-~/project [kite_dev ±] : git add . # 解决完冲突后，将存在的文件变更添加到暂存区
-~/project [kite_dev ±] : git ct 'Merge master to kite_dev'
+~/project [dev ±] : git add . # 解决完冲突后，将存在的文件变更添加到暂存区
+~/project [dev ±] : git ct "'Merge branch 'master' into 'dev'"
 --------------------------------------------------------------------------------
 
-# 保持同步之后，将 kite_dev 分支上开发的功能（提交了多次 commit）合并到远程 master 分支
-# 合并之前，由于之前提交了很多零散的 commit，但实际上这部分代码提交，只是某个功能模块，
-# 为了保证提交日志历史干净，我们将 kite_dev 分支的 commit 进行合并
-# 如这里是：将 “feat: 完成功能模块 -- 子功能1、子功能2、子功能3、子功能4、全部完成 ”
+# 保持同步之后，将 dev 分支上开发的功能（提交了多次 commit）合并到远程 master 分支
+# 合并之前，由于之前提交了很多零散的 commit，但实际上这部分代码提交只是某个功能模块相关，
+# 为了保证提交日志历史干净，我们将 dev 分支的 commit 进行合并
+# 如这里是：将 “feat: 完成功能模块 -- 子功能1、子功能2、子功能3、子功能4、完成收尾 ”
 #         合并为一条日志信息 “xxx功能模块开发完成”
 # 合并多条 commit
-~/project [kite_dev ±] : git rebase -i
+~/project [dev ±] : git rebase -i
 
 --------------------------------------------------------------------------------
-# 将 pick -> s
+pick feat: 完成功能模块 -- 子功能1
+pick feat: 完成功能模块 -- 子功能1
+pick feat: 完成功能模块 -- 子功能1
+pick feat: 完成功能模块 -- 子功能1
+pick feat: 完成功能模块全部完成
+
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# e, edit <commit> = use commit, but stop for amending
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup <commit> = like "squash", but discard this commit's log message
+# x, exec <command> = run command (the rest of the line) using shell
+# b, break = stop here (continue rebase later with 'git rebase --continue')
+# d, drop <commit> = remove commit
+# l, label <label> = label current HEAD with a name
+# t, reset <label> = reset HEAD to a label
+# m, merge [-C <commit> | -c <commit>] <label> [# <oneline>]
+# .       create a merge commit using the original merge commit's
+# .       message (or the oneline, if no original merge commit was
+# .       specified). Use -c <commit> to reword the commit message.
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+
+"将 pick -> s 保存即可"
 # 若有冲突，解决冲突，然后添加到暂存区
+
+# 注：若要取消 rebase 执行 git rebase --abort
 --------------------------------------------------------------------------------
 
-~/project [kite_dev ±] : git rebase --continue
+# 继续 rebase
+~/project [dev ±] : git rebase --continue
 
-# 取消 rebase
-~/project [kite_dev ±] :git rebase --abort
+# 切回 主分支
+~/project [dev ±] : git co master
 
-# 合并操作
-~/project [kite_dev ±] : git checkout master
+# 将 dev 开发的内容合并到主分支 master 上
+~/project [master ±]: git merge dev # Merge branch 'dev' into 'master'
 
-~/project [master ±]: git merge kite
-
+# 查看状态
 ~/project [master ±]: git status
 
 On branch master
@@ -205,11 +234,17 @@ Your branch is ahead of 'origin/master' by 6 commits.
 
 nothing to commit, working tree clean
 
+# 将 merge 的内容推送到远程仓库
 ~/project [master ±]: git push
 ```
 
 ## 参考
 
-- [猴子老師 git tutorial](https://backlog.com/git-tutorial/tw/intro/intro1_1.html)
-- [git tutorial](https://zlargon.gitbooks.io/git-tutorial/content/)
-<!-- - [使用 git rebase 合并多次 commit](https://juejin.cn/post/6844903600976576519) -->
+- [連猴子都能懂的 Git 入門指南](https://backlog.com/git-tutorial/tw/intro/intro1_1.html)
+- [zlargon/git-tutorial](https://github.com/zlargon/git-tutorial)
+<!-- https://stackoverflow.com/questions/37770467/why-do-i-have-to-git-push-set-upstream-origin-branch -->
+
+<br>
+<hr>
+
+_文章写于 **2017 年 11 月** 迁移于 **2021 年 02 月**_
