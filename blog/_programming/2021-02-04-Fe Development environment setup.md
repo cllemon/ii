@@ -1,16 +1,43 @@
 ---
 title: 开发环境的配置和搭建
-summary: 记录平常工作中需要用到的一些工具、环境配置等（FE + Mac）
+summary: 记录平常工作中需要用到的一些工具、环境配置等（ FE + Mac ）
 date: 2021-02-04
 author: Wooden Kite
 location: HuaiNan.AnHui
 ---
 
+## Git
+
+分布式版本管理工具
+
+### 安装与使用
+
+- 对于高版本的 macOS 系统，在 Terminal 里尝试首次运行 git 命令即可。<br>
+  其它参看 [Download for macOS](https://git-scm.com/download/mac)
+
+- 使用可参考 [经常用到的 Git 命令](https://cllemon.github.io/ii/programming/2021/02/03/common-git-operate/)、[Git 的奇技淫巧](https://github.com/521xueweihan/git-tips)
+
+<!-- http://fe.surge.sh/guide/Git.html#%E4%BD%BF%E7%94%A8git-rebase-%E6%9D%A5%E5%90%88%E5%B9%B6%E4%BD%A0%E7%9A%84commit -->
+
+### 配置 ssh key
+
+```sh
+~ : ssh-keygen -t rsa -C "hnx.lemon@gmail.com" # 一路回车~
+
+~ : ls .ssh # 查看生成的配置文件
+
+id_rsa      # 私钥
+id_rsa.pub  # 公钥
+known_hosts # 存储已认证的远程主机 host key
+```
+
+> [使用 SSH 连接到 GitHub](https://docs.github.com/cn/github/authenticating-to-github/connecting-to-github-with-ssh)
+
 ## VS Code
 
-[一个 xxx 的代码编辑器](https://code.visualstudio.com/)，详细请[查看文档](https://code.visualstudio.com/docs)。
+[一个 **XXXX** 的代码编辑器](https://code.visualstudio.com/)，详细请[查看文档](https://code.visualstudio.com/docs)。
 
-### 主题配置
+### 主题配置 💄
 
 ```json
 // 亮色调系（推荐 👏）
@@ -25,47 +52,65 @@ location: HuaiNan.AnHui
 }
 ```
 
-### 扩展插件  🎉
+### 扩展插件 🎉
 
 <br>
 
 1. <span style="color: #607D8B;">如果你需要为 VS Code 提供中文（简体）语言包，你可以安装</span><br>
-  [Chinese (Simplified) Language Pack for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
+   [Chinese (Simplified) Language Pack for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
 
-2. <span style="color: #607D8B;">如果你需要在你的代码里高亮颜色字符，你可以安装 </span><br>
-   [Color Highlight](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)
+2. <span style="color: #607D8B;">如果你需要在你的代码里高亮颜色字符和提供颜色浮窗，你可以安装 </span><br>
+   [Color Highlight](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)<br>
+   [Color Info](https://marketplace.visualstudio.com/items?itemName=bierner.color-info)
 
 3. <span style="color: #607D8B;">如果你需要在你的代码里突出显示 TODO，FIXME 和其他注释，你可以安装 </span><br>
    [TODO Highlight](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight)
 
 4. <span style="color: #607D8B;">如果你需要在你的代码里降低英文拼写错误率，你可以安装 </span><br>
-  [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+   [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 
 5. <span style="color: #607D8B;">如果你需要在你写代码时引入文件时智能补全路径，你可以安装 </span><br>
-  [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)
+   [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)
 
-6. <span style="color: #607D8B;">如果你需要在 VS Code 里集成：查看git日志，文件历史记录，比较分支或提交，你可以安装 </span><br>
-  [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)
+6. <span style="color: #607D8B;">如果你需要在 VS Code 里集成：查看 git 日志，文件历史记录，比较分支或提交，你可以安装 </span><br>
+   [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)
 
 7. <span style="color: #607D8B;">如果你需要在浏览代码时知道每行代码所关联的 Git 提交信息，你可以安装 </span><br>
-  [GitLens — Git supercharged](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+   [GitLens — Git supercharged](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
 
 8. <span style="color: #607D8B;">如果你需要 GitHub 样式的 Markdown 预览以及 Markdown 文档格式检查，你可以安装 </span><br>
-  [Markdown Preview Github Styling](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-preview-github-styles)
-  [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
+   [Markdown Preview Github Styling](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-preview-github-styles)<br>
+   [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
 
-9. <span style="color: #607D8B;">如果你使用的是 react 框架，你可以安装 </span><br>
-  [js-jsx-snippets](https://marketplace.visualstudio.com/items?itemName=skyran.js-jsx-snippets)
-  [vscode-styled-jsx](https://marketplace.visualstudio.com/items?itemName=blanu.vscode-styled-jsx)
+9. <span style="color: #607D8B;">如果你需要快速创建代码片段，你可以安装 </span><br>
+   [JavaScript (ES6) code snippets](https://marketplace.visualstudio.com/items?itemName=xabikos.JavaScriptSnippets)<br>
+   [HTML Snippets](https://marketplace.visualstudio.com/items?itemName=abusaidm.html-snippets)<br>
+   [HTML Boilerplate](https://marketplace.visualstudio.com/items?itemName=sidthesloth.html5-boilerplate)
 
-10. <span style="color: #607D8B;">如果你使用的是 vue 框架，你可以安装 </span><br>
-  [vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
-  [Vue 3 Support - All In One](https://marketplace.visualstudio.com/items?itemName=Wscats.vue)
+10. <span style="color: #607D8B;">如果你使用的是 react 框架，你可以安装 </span><br>
+    [Simple React Snippets](https://marketplace.visualstudio.com/items?itemName=burkeholland.simple-react-snippets)
 
-11. <span style="color: #607D8B;">将 ESLint、Prettier 集成到 VS Code 中</span><br>
-  [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)<br>
-  [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)<br>
-  <span style="color: #9E9E9E;font-size: 13px;">> 该扩展优先使用工作区中安装的 eslint/prettier 库，若未安装则尝试使用全局安装的</span>
+11. <span style="color: #607D8B;">如果你使用的是 vue 框架，你可以安装 </span><br>
+    [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)<br>
+    [Vue 3 Support - All In One](https://marketplace.visualstudio.com/items?itemName=Wscats.vue)<br>
+    [VueHelper](https://marketplace.visualstudio.com/items?itemName=oysun.vuehelper)
+
+12. <span style="color: #607D8B;">将 ESLint、Prettier 集成到 VS Code 中</span><br>
+    [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)<br>
+    [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)<br>
+    <span style="color: #9E9E9E;font-size: 13px;">> 该扩展优先使用工作区中安装的 eslint/prettier 库，若未安装则尝试使用全局安装的</span>
+
+13. <span style="color: #607D8B;">如果你需要知道当前打开的文件尺寸，你可以安装</span><br>
+    [filesize](https://marketplace.visualstudio.com/items?itemName=mkxml.vscode-filesize)
+
+14. <span style="color: #607D8B;">如果你需要在代码里悬停在图像路径上显示图片浮窗，你可以安装</span><br>
+    [Image Preview](https://marketplace.visualstudio.com/items?itemName=kisstkondoros.vscode-gutter-preview)
+
+15. <span style="color: #607D8B;">如果你需要知道你在编程活动中的指标，见解和时间跟踪，你可以安装</span><br>
+    [WakaTime](https://marketplace.visualstudio.com/items?itemName=WakaTime.vscode-wakatime)
+
+16. <span style="color: #607D8B;">如果你想同步 VS Code 配置，你可以安装</span><br>
+    [Settings Sync](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync)
 
 ### 推荐配置 👠
 
@@ -97,12 +142,13 @@ location: HuaiNan.AnHui
   "workbench.fontAliasing": "antialiased",
   "workbench.startupEditor": "none",
   "workbench.settings.editor": "json",
+  "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "files.exclude": {
     "**/.EXCL_*": false,
     "**/.DS_Store": true,
-    "**/.git": true,
+    "**/.git": true
   },
   "files.watcherExclude": {
     "**/.git/objects/**": true,
@@ -112,84 +158,92 @@ location: HuaiNan.AnHui
     "**/dist/**": true
   },
 
-  /* eslint prettier */
-  ""
+  /* 在保存时为所有语言提供格式化（prettier）服务 */
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
-```
-
-## 终端 -- iTerm 2 + oh my zsh
-
-```sh
-iTerm 2
-
-安装
-
-配置
-
-https://github.com/sirius1024/iterm2-with-oh-my-zsh
-```
-
-## Vim
-
-```sh
-https://github.com/cocopon/iceberg.vim
-```
-
-## Git
-
-```sh
-# 安装
-
-# ssh
-
-# 使用
 ```
 
 ## Node
 
-```sh
-node
+Node.js 是一个基于 [Chrome V8](https://v8.dev/) 引擎的 JavaScript 运行时
 
-npm / yarn
+### 安装与使用
 
-nvm
+- 安装参看 [Node.js 以往的版本](https://nodejs.org/zh-cn/download/)
 
-nrm
-```
+- 使用参看 [Node.js 文档](https://nodejs.org/zh-cn/docs/)
+
+### Npm / Yarn
+
+- [npm](https://www.npmjs.com/) Node.js 软件包管理器，安装 Node.js 时附带安装
+
+- [yarn](https://classic.yarnpkg.com/en/) 快速，可靠和安全的依赖性管理（npm 替代品） [安装](https://classic.yarnpkg.com/en/docs/install#mac-stable)，[使用](https://classic.yarnpkg.com/en/docs)
+
+### Nvm
+
+Node.js 版本管理器，[安装](https://github.com/nvm-sh/nvm#installing-and-updating)，[使用](https://github.com/nvm-sh/nvm#usage)
+
+### Nrm
+
+Npm 源管理器，[安装](https://github.com/Pana/nrm#install)，[使用](https://github.com/Pana/nrm#usage)
+
+## Homebrew
+
+[Homebrew](https://brew.sh/index_zh-cn)， Mac 的软件包管理器。
+
+## Terminal -- iTerm 2 + oh my zsh
+
+<br>
+
+> **参考以下几篇文章任一一篇根据自己喜欢配置即可**<br>
+>
+> [iTerm2 + Oh My Zsh 打造舒适终端体验](https://github.com/sirius1024/iterm2-with-oh-my-zsh)<br>
+>
+> [iTerm2 + Oh My Zsh 教程](https://juejin.cn/post/6844904178075058189)<br>
+>
+> [iTerm2 + Oh My Zsh + Solarized color scheme + Source Code Pro Powerline + Font Awesome + Powerlevel10k - (macOS)](https://gist.github.com/kevin-smets/8568070)
+
+## Vim
+
+- [vim](https://github.com/vim/vim)
+- [neovim](https://github.com/neovim/neovim)
+
+<!-- https://juejin.cn/post/6844903460211523592 -->
 
 ## Chrome Extends
 
-```sh
-插件必备。。。
+- [OneTab](https://chrome.google.com/webstore/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall) 将所有标签页转换成一个列表，减轻标签页混乱现象
+- [掘金](https://chrome.google.com/webstore/detail/%E6%8E%98%E9%87%91/lecdifefmmfjnjjinhaennhdlmcaeeeb) 为程序员、设计师、产品经理每日发现优质内容
+- [Wappalyzer](https://chrome.google.com/webstore/detail/wappalyzer/gppongmhjkpfnbhagpmjfkannfbllamg) 识别网页所用的技术
+- [Web Maker](https://chrome.google.com/webstore/detail/web-maker/lkfkkhfhhdkiemehlpkgjeojomhpccnh) HTML/CSS/JS 试验田
+- [Quick QR](https://chrome.google.com/webstore/detail/qr-code-generator/afpbjjgbdimpioenaedcjgkaigggcdpp/related) 方便地把当前页面转化成二维码
+- [Blipshot: one click full page screenshots](https://chrome.google.com/webstore/detail/blipshot-one-click-full-p/mdaboflcmhejfihjcbmdiebgfchigjcf) 全页截图
 
-```
+- [Google 翻译](https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb) 浏览网页时可轻松划词查看翻译
+- [沙拉查词](https://chrome.google.com/webstore/detail/%E6%B2%99%E6%8B%89%E6%9F%A5%E8%AF%8D-%E8%81%9A%E5%90%88%E8%AF%8D%E5%85%B8%E5%88%92%E8%AF%8D%E7%BF%BB%E8%AF%91/cdonnmffkdaoajfknoeeecmchibpmkmg) 浏览网页时可轻松划词查看翻译
 
-## 翻译工具
+- [Gliffy Diagrams](https://chrome.google.com/webstore/detail/gliffy-diagrams/bhmicilclplefnflapjmnngmkkkkpfad) 快速轻松地创建具有专业外观的图表和流程图
+- [Axure RP Extension for Chrome](https://chrome.google.com/webstore/detail/axure-rp-extension-for-ch/dogkpdfcklifaemcdfbildhcofnopogp) 查看 Axure RP 原型
+- [Markdown Viewer](https://chrome.google.com/webstore/detail/markdown-viewer/ckkdlimhmcjmikdlpkmbgfkaikojcbjk) Markdown 预览
+- [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) 美化和校验 JSON 文件
 
-```sh
-有道
-Google 翻译
-```
+- [GitHub Isometric Contributions](https://chrome.google.com/webstore/detail/github-isometric-contribu/mjoedlfflcchnleknnceiplgaeoegien) 3D GitHub 贡献图
+- [Sourcegraph](https://chrome.google.com/webstore/detail/sourcegraph/dgjhfomjieaadpoljlnidmbgkdffpack) 向 GitHub、GitLab 和其他主机添加代码智能: 悬停、定义、引用
+- [Octotree - GitHub code tree](https://chrome.google.com/webstore/detail/octotree-github-code-tree/bkhaagjahfmjljalopjnoealnfndnagc) 增强 GitHub 代码审查和探索
 
-## 文档相关工具
+- [PageSpeed Insights (with PNaCl)](https://chrome.google.com/webstore/detail/pagespeed-insights-with-p/lanlbpjbalfkflkhegagflkgcfklnbnh) 分析网页的性能，并得到关于如何优化它们的具体建议
+- [Save All Resources](https://chrome.google.com/webstore/detail/save-all-resources/abpdnfjocnmdomablahdcfnoggeeiedb) 保存网页资源
+- [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) React 调试工具
+- [Vue.js devtools](https://chrome.google.com/webstore/detail/vuejs-devtools/ljjemllljcmogpfapbkkighbhhppjdbg) Vue.js 调试工具
 
-```sh
-Typora
+## Other Tools
 
-one tips
-```
-
-## 其它工具
-
-```sh
-foxmail
-
-wx
-
-qq music
-```
-
-> 迁移中....
-
-<!-- http://fe.surge.sh/guide/VSCode.html#vscode-%E8%AE%BE%E7%BD%AE -->
-<!-- https://github.com/i5ting/i5ting-mac-init -->
+- [Typora](https://typora.io/)
+- [Foxmail](https://www.foxmail.com/)
+- [微信](https://weixin.qq.com/)
+- [网易云音乐](https://music.163.com/#/download)
+- [QQ 音乐](https://y.qq.com/download/mac.html?part=1&ADTAG=YQQ)
+- [网易有道词 ‪ 典](https://apps.apple.com/cn/app/you-dao-ci-dian/id491854842?mt=12)
+- [Google 翻译](https://github.com/MoeFE/GoogleTranslate/releases/tag/v2.0.0-beta.2)
+- [搜狗输入法](https://pinyin.sogou.com/mac/?r=pinyin)
